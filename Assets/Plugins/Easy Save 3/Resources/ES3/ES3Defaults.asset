@@ -51,6 +51,8 @@ MonoBehaviour:
     - ShapesEditor
     - ShapesRuntime
     - Sirenix.OdinInspector.Modules.UnityMathematics
+    - UniRx
+    - UniRx.Examples
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
