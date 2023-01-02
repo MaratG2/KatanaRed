@@ -6,7 +6,7 @@ namespace KatanaRed.SubBehaviours
 {
     public class PlayerMovable : Movable
     {
-        public PlayerMovable(MovableData data) : base(data)
+        public PlayerMovable(MovableData data, Rigidbody2D rb2d) : base(data, rb2d)
         {
         }
         
