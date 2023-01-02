@@ -9,12 +9,13 @@ namespace KatanaRed.Behaviours
     public class TestBehaviour : MonoBehaviour
     {
         [SerializeField, Required] private MovableData _movableData;
+        [SerializeField, Required] private JumpableData _jumpableData;
         private Movable _movable;
         private Jumpable _jumpable;
         private void Awake()
         {
             _movable = new PlayerMovable(_movableData);
-            _jumpable = new PlayerJumpable();
+            _jumpable = new PlayerJumpable(_jumpableData);
         }
 
         private void Update()

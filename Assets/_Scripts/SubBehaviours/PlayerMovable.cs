@@ -9,6 +9,7 @@ namespace KatanaRed.SubBehaviours
         public PlayerMovable(MovableData data) : base(data)
         {
         }
+        
         public override void Move(Vector2 direction, float dt)
         {
             throw new System.NotImplementedException();
