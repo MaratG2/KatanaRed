@@ -49,6 +49,7 @@ MonoBehaviour:
     - PsdPlugin
     - ShapesEditor
     - ShapesRuntime
+    - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
