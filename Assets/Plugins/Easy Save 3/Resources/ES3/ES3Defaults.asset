@@ -30,8 +30,24 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Assembly-CSharp-firstpass
     - Assembly-CSharp
+    - Assembly-CSharp-firstpass
+    - Cinemachine
+    - com.rlabrecque.steamworks.net
+    - com.rlabrecque.steamworks.net.editor
+    - Destructible2D
+    - DOTween.Modules
+    - DOTweenPro.EditorScripts
+    - DOTweenPro.Scripts
+    - Heathen.Core
+    - Heathen.Core.Editor
+    - Heathen.Steamworks
+    - Heathen.Steamworks.Editor
+    - Heathen.Steamworks.Examples
+    - PPv2URPConverters
+    - PsdPlugin
+    - ShapesEditor
+    - ShapesRuntime
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
