@@ -7,6 +7,7 @@ namespace KatanaRed.Abstracts
     {
         protected MovableData data;
         protected Rigidbody2D rb2d;
+        protected float currentSpeed = 0;
         public Movable(MovableData data, Rigidbody2D rb2d)
         {
             this.data = data;
