@@ -1,16 +1,16 @@
-using KatanaRed.Interfaces;
+using KatanaRed.Abstracts;
 using UnityEngine;
 
 namespace KatanaRed.Behaviours
 {
     public class PlayerBehaviour : MonoBehaviour
     {
-        private IMovable _movable;
-        private IJumpable _jumpable;
+        private Movable _movable;
+        private Jumpable _jumpable;
         private void Awake()
         {
-            _movable = GetComponent<IMovable>();
-            _jumpable = GetComponent<IJumpable>();
+            _movable = GetComponent<Movable>();
+            _jumpable = GetComponent<Jumpable>();
         }
 
         private void Update()

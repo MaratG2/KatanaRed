@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace KatanaRed.Interfaces
+namespace KatanaRed.Abstracts
 {
-    public interface IJumpable
+    public abstract class Jumpable
     {
-        void Jump(Vector2 direction, float strength);
+        public abstract void Jump(Vector2 direction);
     }
 }
