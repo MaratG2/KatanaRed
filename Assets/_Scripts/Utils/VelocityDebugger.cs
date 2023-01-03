@@ -1,4 +1,3 @@
-using KatanaRed.Abstracts;
 using KatanaRed.Behaviours;
 using KatanaRed.Input;
 using Sirenix.OdinInspector;
@@ -11,7 +10,6 @@ namespace KatanaRed.Utils
         [Header("Dependencies")]
         [SerializeField, Required] private bool _isDebugOn = false;
         [SerializeField, Required] private PlayerBehaviour _playerBehaviour;
-        [SerializeField, Required] private MovementInput _movementInput;
         [SerializeField, Required] private LineRenderer _movementLine;
         
         private void FixedUpdate()

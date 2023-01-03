@@ -1,7 +1,7 @@
 using KatanaRed.Scriptables;
 using UnityEngine;
 
-namespace KatanaRed.Abstracts
+namespace KatanaRed.Movement
 {
     public abstract class Movable
     {

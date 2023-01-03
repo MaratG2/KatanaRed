@@ -1,7 +1,6 @@
-using KatanaRed.Abstracts;
 using KatanaRed.Input;
+using KatanaRed.Movement;
 using KatanaRed.Scriptables;
-using KatanaRed.SubBehaviours;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

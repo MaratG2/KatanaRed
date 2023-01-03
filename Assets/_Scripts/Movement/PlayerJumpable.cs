@@ -1,8 +1,7 @@
-﻿using KatanaRed.Abstracts;
-using KatanaRed.Scriptables;
+﻿using KatanaRed.Scriptables;
 using UnityEngine;
 
-namespace KatanaRed.SubBehaviours
+namespace KatanaRed.Movement
 {
     public class PlayerJumpable : Jumpable
     {
