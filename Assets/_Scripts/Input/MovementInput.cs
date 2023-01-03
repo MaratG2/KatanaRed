@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class MovementInput : MonoBehaviour
+namespace KatanaRed.Input
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MovementInput : MonoBehaviour
     {
-        
-    }
+        public Vector2 Movement { get; private set; } = Vector2.zero;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void PlayerMove(InputAction.CallbackContext context)
+        {
+            Movement = context.ReadValue<Vector2>();
+        }
     }
 }

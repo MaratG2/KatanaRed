@@ -199,7 +199,7 @@ MonoBehaviour:
   m_TrackedDevicePositionAction: {fileID: 1253783249}
   m_TrackedDeviceOrientationAction: {fileID: 881782829}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 2
   m_CursorLockBehavior: 0
 --- !u!1 &313594248
 GameObject:
@@ -1992,7 +1992,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
