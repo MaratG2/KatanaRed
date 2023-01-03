@@ -13,7 +13,6 @@ namespace KatanaRed.Utils
         [SerializeField, Required] private PlayerBehaviour _playerBehaviour;
         [SerializeField, Required] private MovementInput _movementInput;
         [SerializeField, Required] private LineRenderer _movementLine;
-        private float _oldSign = 0f;
         
         private void FixedUpdate()
         {
