@@ -48,7 +48,6 @@ namespace KatanaRed.Movement
         public override void JumpEnd()
         {
             _isJumpEnd = true;
-            _oldMaxHeight = 0f;
         }
         
         private void Jump()
@@ -74,10 +73,13 @@ namespace KatanaRed.Movement
         private async Task JumpAsync()
         {
             float currentTime = 0f;
-            while (!_isJumpEnd)
+            float totalHeight = 0f;
+            _oldMaxHeight = 0f;
+            while (!_isJumpEnd || totalHeight < data.minJumpHeight)
             {
                 currentTime += Time.fixedDeltaTime;
                 float heightDelta = GetHeightDelta(currentTime);
+                totalHeight += heightDelta;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, heightDelta / Time.fixedDeltaTime);
                 await Task.Delay((int)(Time.fixedDeltaTime * 1000));
             }
