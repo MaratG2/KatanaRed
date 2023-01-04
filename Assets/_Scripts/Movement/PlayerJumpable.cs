@@ -72,12 +72,22 @@ namespace KatanaRed.Movement
 
         private async Task JumpAsync()
         {
+            float currentTime = 0f;
             while (!_isJumpEnd)
             {
                 Debug.Log("Jumping...");
-                rb2d.AddForce(new Vector2(0f, 25f));
+                currentTime += Time.fixedDeltaTime;
+                float maxJumpHeight = GetHeightFromDataCurve(currentTime);
+                float magicLowerCoeffitient = 1.2f;
+                rb2d.AddForce(new Vector2(0f, maxJumpHeight / currentTime / magicLowerCoeffitient - Physics2D.gravity.y), ForceMode2D.Force);
                 await Task.Delay((int)(Time.fixedDeltaTime * 1000));
             }
+        }
+
+        private float GetHeightFromDataCurve(float currentTime)
+        {
+            float ratioTime = currentTime / data.minMaxTime;
+            return data.jumpStrength.Evaluate(ratioTime);
         }
         
         private void AirJump()
