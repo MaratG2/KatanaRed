@@ -3133,18 +3133,6 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 211083603}
-    - target: {fileID: 6463569088987197870, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463569088987197870, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.075
-      objectReference: {fileID: 0}
-    - target: {fileID: 8961250617989637698, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: _isDebugOn
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

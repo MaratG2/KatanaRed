@@ -32,7 +32,7 @@ namespace KatanaRed.Movement
         {
             if(CanJump())
             {
-                Jump();
+                Jump(true);
                 return;
             }
             if (CanAirJump())
@@ -50,9 +50,10 @@ namespace KatanaRed.Movement
             _isJumpEnd = true;
         }
         
-        private void Jump()
+        private void Jump(bool lowerRemaining)
         {
-            _remainingJumps--;
+            if(lowerRemaining)
+                _remainingJumps--;
             _isJumpEnd = false;
             JumpEndAsync();
             JumpAsync();
@@ -97,12 +98,12 @@ namespace KatanaRed.Movement
         private void AirJump()
         {
             _remainingJumps--;
-            Jump();
+            Jump(false);
         }
         private void WallJump()
         {
             _remainingWallJumps--;
-            Jump();
+            Jump(false);
         }
         
         private bool CanJump()
@@ -111,7 +112,7 @@ namespace KatanaRed.Movement
         }
         private bool CanAirJump()
         {
-            return _remainingJumps > 1 && !_jumpHitboxes.IsOnGround && !_jumpHitboxes.IsOnWall;
+            return _remainingJumps >= 1 && !_jumpHitboxes.IsOnGround && !_jumpHitboxes.IsOnWall;
         }
         private bool CanWallJump()
         {
