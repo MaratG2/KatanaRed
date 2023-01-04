@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcda6bd3d1943608aa4a9db26cd2cbd, type: 3}
   m_Name: PlayerJumpableData
   m_EditorClassIdentifier: 
-  jumpStrength: 3
+  minJumpStrength: 1
+  maxJumpStrength: 4
+  minMaxTime: 0.8
+  maxDefaultJumps: 1
+  maxWallJumps: 1

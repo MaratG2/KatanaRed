@@ -12,6 +12,7 @@ namespace KatanaRed.Behaviours
         [SerializeField, Required] private Rigidbody2D _rb2d;
         [SerializeField, Required] private MovableData _movableData;
         [SerializeField, Required] private JumpableData _jumpableData;
+        [SerializeField, Required] private JumpHitboxes _jumpHitboxes;
         private MovementInput _movementInput;
         private Movable _movable;
         private Jumpable _jumpable;
@@ -21,7 +22,7 @@ namespace KatanaRed.Behaviours
         {
             _movementInput = GetComponent<MovementInput>();
             _movable = new PlayerMovable(_movableData, _rb2d);
-            _jumpable = new PlayerJumpable(_jumpableData, _rb2d);
+            _jumpable = new PlayerJumpable(_jumpableData, _rb2d, _movementInput, _jumpHitboxes);
         }
 
         private void FixedUpdate()

@@ -13,6 +13,7 @@ namespace KatanaRed.Movement
             this.rb2d = rb2d;
         }
         
-        public abstract void Jump(Vector2 direction);
+        public abstract void JumpBegin();
+        public abstract void JumpEnd();
     }
 }

@@ -18,7 +18,6 @@ namespace KatanaRed.Movement
                 return;
             
             OnWallEntered?.Invoke(_isLeft);
-            Debug.Log($"Wall Entered Jump. Left: {_isLeft}");
         }
 
         private void OnTriggerExit2D(Collider2D col)
@@ -28,7 +27,6 @@ namespace KatanaRed.Movement
                 return;
             
             OnWallExited?.Invoke();
-            Debug.Log("Wall Exited Jump");
         }
     }
 }

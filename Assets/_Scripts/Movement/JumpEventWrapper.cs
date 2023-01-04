@@ -17,7 +17,6 @@ namespace KatanaRed.Movement
                 return;
             
             OnGroundEntered?.Invoke();
-            Debug.Log("Ground Entered Jump");
         }
 
         private void OnTriggerExit2D(Collider2D col)
@@ -27,7 +26,6 @@ namespace KatanaRed.Movement
                 return;
             
             OnGroundExited?.Invoke();
-            Debug.Log("Ground Exited Jump");
         }
     }
 }
