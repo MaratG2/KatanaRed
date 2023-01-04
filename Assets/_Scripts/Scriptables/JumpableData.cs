@@ -6,6 +6,7 @@ namespace KatanaRed.Scriptables
     public class JumpableData : ScriptableObject
     {
         public AnimationCurve jumpStrength;
+        public float minJumpHeight = 1;
         public float minMaxTime;
         public int maxDefaultJumps = 1;
         public int maxWallJumps = 1;

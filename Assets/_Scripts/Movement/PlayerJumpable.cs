@@ -10,6 +10,8 @@ namespace KatanaRed.Movement
         private MovementInput _movementInput;
         private JumpHitboxes _jumpHitboxes;
         private bool _isJumpEnd;
+        private float _oldMaxHeight = 0f;
+        
         public PlayerJumpable(JumpableData data, Rigidbody2D rb2d, MovementInput movementInput, JumpHitboxes jumpHitboxes) : base(data, rb2d)
         {
             this._movementInput = movementInput;
@@ -46,7 +48,7 @@ namespace KatanaRed.Movement
         public override void JumpEnd()
         {
             _isJumpEnd = true;
-            Debug.Log("Jump End");
+            _oldMaxHeight = 0f;
         }
         
         private void Jump()
@@ -55,7 +57,6 @@ namespace KatanaRed.Movement
             _isJumpEnd = false;
             JumpEndAsync();
             JumpAsync();
-            Debug.Log("Jump");
         }
 
         private async Task JumpEndAsync()
@@ -75,30 +76,31 @@ namespace KatanaRed.Movement
             float currentTime = 0f;
             while (!_isJumpEnd)
             {
-                Debug.Log("Jumping...");
                 currentTime += Time.fixedDeltaTime;
-                float maxJumpHeight = GetHeightFromDataCurve(currentTime);
-                float magicLowerCoeffitient = 1.2f;
-                rb2d.AddForce(new Vector2(0f, maxJumpHeight / currentTime / magicLowerCoeffitient - Physics2D.gravity.y), ForceMode2D.Force);
+                float heightDelta = GetHeightDelta(currentTime);
+                rb2d.velocity = new Vector2(rb2d.velocity.x, heightDelta / Time.fixedDeltaTime);
                 await Task.Delay((int)(Time.fixedDeltaTime * 1000));
             }
+            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
         }
 
-        private float GetHeightFromDataCurve(float currentTime)
+        private float GetHeightDelta(float currentTime)
         {
             float ratioTime = currentTime / data.minMaxTime;
-            return data.jumpStrength.Evaluate(ratioTime);
+            float heightDelta = data.jumpStrength.Evaluate(ratioTime) - _oldMaxHeight;
+            _oldMaxHeight += heightDelta;
+            return heightDelta;
         }
         
         private void AirJump()
         {
             _remainingJumps--;
-            Debug.Log("AirJump");
+            Jump();
         }
         private void WallJump()
         {
             _remainingWallJumps--;
-            Debug.Log("WallJump");
+            Jump();
         }
         
         private bool CanJump()
