@@ -1,4 +1,5 @@
-﻿using KatanaRed.Input;
+﻿using System.Threading.Tasks;
+using KatanaRed.Input;
 using KatanaRed.Scriptables;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace KatanaRed.Movement
     {
         private MovementInput _movementInput;
         private JumpHitboxes _jumpHitboxes;
-        
+        private bool _isJumpEnd;
         public PlayerJumpable(JumpableData data, Rigidbody2D rb2d, MovementInput movementInput, JumpHitboxes jumpHitboxes) : base(data, rb2d)
         {
             this._movementInput = movementInput;
@@ -44,14 +45,41 @@ namespace KatanaRed.Movement
         }
         public override void JumpEnd()
         {
+            _isJumpEnd = true;
             Debug.Log("Jump End");
         }
         
         private void Jump()
         {
             _remainingJumps--;
+            _isJumpEnd = false;
+            JumpEndAsync();
+            JumpAsync();
             Debug.Log("Jump");
         }
+
+        private async Task JumpEndAsync()
+        {
+            int totalTime = 0;
+            while (!_isJumpEnd && totalTime < data.minMaxTime * 1000)
+            {
+                var waitTime = (int)(Time.fixedDeltaTime * 1000);
+                totalTime += waitTime;
+                await Task.Delay(waitTime);
+            }
+            JumpEnd();
+        }
+
+        private async Task JumpAsync()
+        {
+            while (!_isJumpEnd)
+            {
+                Debug.Log("Jumping...");
+                rb2d.AddForce(new Vector2(0f, 25f));
+                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
+            }
+        }
+        
         private void AirJump()
         {
             _remainingJumps--;
@@ -65,7 +93,7 @@ namespace KatanaRed.Movement
         
         private bool CanJump()
         {
-            return _remainingJumps == 1 && _jumpHitboxes.IsOnGround;
+            return _remainingJumps >= 1 && _jumpHitboxes.IsOnGround;
         }
         private bool CanAirJump()
         {
@@ -78,6 +106,7 @@ namespace KatanaRed.Movement
 
         private void GroundLanded()
         {
+            _isJumpEnd = true;
             _remainingJumps = data.maxDefaultJumps;
             _remainingWallJumps = data.maxWallJumps;
         }
