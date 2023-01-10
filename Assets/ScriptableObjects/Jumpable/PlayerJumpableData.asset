@@ -39,4 +39,5 @@ MonoBehaviour:
   minJumpHeight: 1
   minMaxTime: 0.5
   maxDefaultJumps: 1
-  maxWallJumps: 1
+  maxAirJumps: 0
+  maxWallJumps: 10
