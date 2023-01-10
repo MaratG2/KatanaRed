@@ -9,6 +9,7 @@ namespace KatanaRed.Scriptables
         public float minJumpHeight = 1;
         public float minMaxTime;
         public int maxDefaultJumps = 1;
+        public int maxAirJumps = 0;
         public int maxWallJumps = 1;
     }
 }

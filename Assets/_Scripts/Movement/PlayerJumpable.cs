@@ -54,6 +54,7 @@ namespace KatanaRed.Movement
         {
             if(lowerRemaining)
                 _remainingJumps--;
+            
             _isJumpEnd = false;
             JumpEndAsync();
             JumpAsync();
@@ -97,7 +98,7 @@ namespace KatanaRed.Movement
         
         private void AirJump()
         {
-            _remainingJumps--;
+            _remainingAirJumps--;
             Jump(false);
         }
         private void WallJump()
@@ -112,17 +113,18 @@ namespace KatanaRed.Movement
         }
         private bool CanAirJump()
         {
-            return _remainingJumps >= 1 && !_jumpHitboxes.IsOnGround && !_jumpHitboxes.IsOnWall;
+            return _remainingAirJumps >= 1 && !_jumpHitboxes.IsOnGround && !_jumpHitboxes.IsOnWall;
         }
         private bool CanWallJump()
         {
-            return !_jumpHitboxes.IsOnGround && _remainingWallJumps > 0 && _jumpHitboxes.IsOnWall;
+            return _remainingWallJumps >= 1 && !_jumpHitboxes.IsOnGround &&  _jumpHitboxes.IsOnWall;
         }
 
         private void GroundLanded()
         {
             _isJumpEnd = true;
             _remainingJumps = data.maxDefaultJumps;
+            _remainingAirJumps = data.maxAirJumps;
             _remainingWallJumps = data.maxWallJumps;
         }
     }

@@ -8,12 +8,14 @@ namespace KatanaRed.Movement
         protected JumpableData data;
         protected Rigidbody2D rb2d;
         protected int _remainingJumps;
+        protected int _remainingAirJumps;
         protected int _remainingWallJumps;
         public Jumpable(JumpableData data, Rigidbody2D rb2d)
         {
             this.data = data;
             this.rb2d = rb2d;
             _remainingJumps = data.maxDefaultJumps;
+            _remainingAirJumps = data.maxAirJumps;
             _remainingWallJumps = data.maxWallJumps;
         }
         
