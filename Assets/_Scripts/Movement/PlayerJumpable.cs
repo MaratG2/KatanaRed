@@ -56,46 +56,34 @@ namespace KatanaRed.Movement
                 _remainingJumps--;
             
             _isJumpEnd = false;
-            JumpEndAsync();
             JumpAsync();
-        }
-
-        private async Task JumpEndAsync()
-        {
-            int totalTime = 0;
-            while (!_isJumpEnd && totalTime < data.minMaxTime * 1000)
-            {
-                var waitTime = (int)(Time.fixedDeltaTime * 1000);
-                totalTime += waitTime;
-                await Task.Delay(waitTime);
-            }
-            JumpEnd();
         }
 
         private async Task JumpAsync()
         {
             float currentTime = 0f;
+            float oldPositionY = rb2d.transform.position.y;
             float totalHeight = 0f;
             _oldMaxHeight = 0f;
-            while (!_isJumpEnd || totalHeight < data.minJumpHeight)
+            rb2d.gravityScale = data.jumpGravity;
+            
+            float jumpForce = Mathf.Sqrt(data.maxJumpHeight * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
+            rb2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+
+            do
             {
+                totalHeight = rb2d.transform.position.y - oldPositionY;
                 currentTime += Time.fixedDeltaTime;
-                float heightDelta = GetHeightDelta(currentTime);
-                totalHeight += heightDelta;
-                rb2d.velocity = new Vector2(rb2d.velocity.x, heightDelta / Time.fixedDeltaTime);
+                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
+            } while ((!_isJumpEnd || totalHeight < data.minJumpHeight) && rb2d.velocity.y > 0);
+            rb2d.gravityScale = data.stopGravity;
+            while (rb2d.velocity.y > Mathf.Epsilon)
+            {
                 await Task.Delay((int)(Time.fixedDeltaTime * 1000));
             }
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
+            rb2d.gravityScale = data.fallGravity;
         }
 
-        private float GetHeightDelta(float currentTime)
-        {
-            float ratioTime = currentTime / data.minMaxTime;
-            float heightDelta = data.jumpStrength.Evaluate(ratioTime) - _oldMaxHeight;
-            _oldMaxHeight += heightDelta;
-            return heightDelta;
-        }
-        
         private void AirJump()
         {
             _remainingAirJumps--;

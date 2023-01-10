@@ -12,32 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcda6bd3d1943608aa4a9db26cd2cbd, type: 3}
   m_Name: PlayerJumpableData
   m_EditorClassIdentifier: 
-  jumpStrength:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0041656494
-      value: 0
-      inSlope: 7.470473
-      outSlope: 7.470473
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.05833333
-    - serializedVersion: 3
-      time: 1
-      value: 4
-      inSlope: 0.86028916
-      outSlope: 0.86028916
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.30833334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   minJumpHeight: 1
-  minMaxTime: 0.5
+  maxJumpHeight: 3
+  jumpGravity: 4
+  fallGravity: 4.5
+  stopGravity: 15
   maxDefaultJumps: 1
   maxAirJumps: 0
   maxWallJumps: 10
