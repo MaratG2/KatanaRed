@@ -168,8 +168,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678658792222691774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.075, z: 0}
-  m_LocalScale: {x: 0.68, y: 0.35, z: 1}
+  m_LocalPosition: {x: 0, y: -0.91, z: 0}
+  m_LocalScale: {x: 0.68, y: 0.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4573249129057817290}
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 4870654953726209019}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -718,6 +718,7 @@ MonoBehaviour:
   _rb2d: {fileID: 4870654953726209019}
   _movableData: {fileID: 11400000, guid: f910994e4341e974b9efdf8fe049824d, type: 2}
   _jumpableData: {fileID: 11400000, guid: 4e0100e33dc2f7c4684a31093cb444fc, type: 2}
+  _wallJumpableData: {fileID: 11400000, guid: 08e626f88b461b243a6f0446d025abec, type: 2}
   _jumpHitboxes: {fileID: 313414197}
 --- !u!114 &5383931254872815000
 MonoBehaviour:
@@ -856,7 +857,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -964,7 +965,7 @@ GameObject:
   - component: {fileID: 4349271254228255698}
   m_Layer: 0
   m_Name: Movement Hitbox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

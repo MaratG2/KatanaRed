@@ -5,18 +5,20 @@ namespace KatanaRed.Movement
 {
     public abstract class Jumpable
     {
-        protected JumpableData data;
+        protected JumpableData jumpData;
+        protected WallJumpableData wallJumpData;
         protected Rigidbody2D rb2d;
         protected int _remainingJumps;
         protected int _remainingAirJumps;
         protected int _remainingWallJumps;
-        public Jumpable(JumpableData data, Rigidbody2D rb2d)
+        public Jumpable(JumpableData jumpData, WallJumpableData wallJumpData, Rigidbody2D rb2d)
         {
-            this.data = data;
+            this.jumpData = jumpData;
+            this.wallJumpData = wallJumpData;
             this.rb2d = rb2d;
-            _remainingJumps = data.maxDefaultJumps;
-            _remainingAirJumps = data.maxAirJumps;
-            _remainingWallJumps = data.maxWallJumps;
+            _remainingJumps = jumpData.MaxJumps;
+            _remainingAirJumps = jumpData.MaxAirJumps;
+            _remainingWallJumps = wallJumpData.MaxJumps;
         }
         
         public abstract void JumpBegin();

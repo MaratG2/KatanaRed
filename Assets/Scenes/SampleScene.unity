@@ -114822,16 +114822,8 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 985735162}
     m_Modifications:
-    - target: {fileID: 4870654953726209019, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5383931254471362078, guid: ef2e671a41074e549af74961ee50990a, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383931254471362078, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5383931254471362079, guid: ef2e671a41074e549af74961ee50990a, type: 3}
@@ -114886,18 +114878,6 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 211083603}
-    - target: {fileID: 5622659560269772416, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463569088987197870, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463569088987197870, guid: ef2e671a41074e549af74961ee50990a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.91
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

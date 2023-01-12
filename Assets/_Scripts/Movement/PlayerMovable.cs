@@ -8,10 +8,10 @@ namespace KatanaRed.Movement
         public PlayerMovable(MovableData data, Rigidbody2D rb2d) : base(data, rb2d)
         {
         }
-        
-        public override void Move(Vector2 direction, float dt)
+
+        public override void Move(Vector2 direction, float dt, bool canMove)
         {
-            if (rb2d.velocity.x.Equals(0f) && currentSpeed.Equals(0f) && direction.x.Equals(0f))
+            if (!canMove || rb2d.velocity.x.Equals(0f) && currentSpeed.Equals(0f) && direction.x.Equals(0f))
                 return;
             
             currentSpeed = CalculateCurrentSpeed(direction, dt);

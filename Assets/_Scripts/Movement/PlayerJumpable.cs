@@ -12,7 +12,9 @@ namespace KatanaRed.Movement
         private bool _isJumpEnd;
         private float _oldMaxHeight = 0f;
         
-        public PlayerJumpable(JumpableData data, Rigidbody2D rb2d, MovementInput movementInput, JumpHitboxes jumpHitboxes) : base(data, rb2d)
+        public PlayerJumpable(JumpableData jumpData, WallJumpableData wallJumpData, 
+            Rigidbody2D rb2d, MovementInput movementInput, JumpHitboxes jumpHitboxes) 
+            : base(jumpData, wallJumpData, rb2d)
         {
             this._movementInput = movementInput;
             this._jumpHitboxes = jumpHitboxes;
@@ -58,16 +60,44 @@ namespace KatanaRed.Movement
             _isJumpEnd = false;
             JumpAsync();
         }
+        private void AirJump()
+        {
+            _remainingAirJumps--;
+            Jump(false);
+        }
+        private void WallJump()
+        {
+            _remainingWallJumps--;
+            _isJumpEnd = false;
+            WallJumpAsync();
+        }
 
         private async UniTask JumpAsync()
         {
-            rb2d.gravityScale = data.jumpGravity;
-            float jumpForce = Mathf.Sqrt(data.maxJumpHeight * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
+            rb2d.gravityScale = jumpData.JumpGravity;
+            float jumpForce = Mathf.Sqrt(jumpData.MaxJumpHeight * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
             rb2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             await WaitForJumpEnd();
-            rb2d.gravityScale = data.stopGravity;
+            rb2d.gravityScale = jumpData.StopGravity;
             await WaitForJumpPeak();
-            rb2d.gravityScale = data.fallGravity;
+            rb2d.gravityScale = jumpData.FallGravity;
+        }
+        
+        private async UniTask WallJumpAsync()
+        {
+            _movementInput.canMove = false;
+            rb2d.gravityScale = wallJumpData.JumpGravity;
+            int direction = _jumpHitboxes.IsOnLeft ? 1 : -1;
+            float jumpForce = Mathf.Sqrt(wallJumpData.JumpForce * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
+            Vector2 force = jumpForce * wallJumpData.JumpPositiveDirection.normalized;
+            force = new Vector2(force.x * direction, force.y);
+            rb2d.AddForce(force, ForceMode2D.Impulse);
+            await UniTask.Delay((int)(wallJumpData.JumpTime * 1000));
+            rb2d.gravityScale = wallJumpData.StopGravity;
+            await WaitForJumpPeak();
+            rb2d.gravityScale = wallJumpData.FallGravity;
+            await UniTask.Delay((int)(wallJumpData.FallTime * 1000));
+            _movementInput.canMove = true;
         }
 
         private async UniTask WaitForJumpEnd()
@@ -78,26 +108,14 @@ namespace KatanaRed.Movement
             {
                 totalHeight = rb2d.transform.position.y - oldPositionY;
                 await UniTask.WaitForFixedUpdate();
-            } while ((!_isJumpEnd || totalHeight < data.minJumpHeight) && rb2d.velocity.y > 0);
+            } while ((!_isJumpEnd || totalHeight < jumpData.MinJumpHeight) && rb2d.velocity.y > 0);
         }
-
         private async UniTask WaitForJumpPeak()
         {
             while (rb2d.velocity.y > Mathf.Epsilon)
                 await UniTask.WaitForFixedUpdate();
         }
 
-        private void AirJump()
-        {
-            _remainingAirJumps--;
-            Jump(false);
-        }
-        private void WallJump()
-        {
-            _remainingWallJumps--;
-            Jump(false);
-        }
-        
         private bool CanJump()
         {
             return _remainingJumps >= 1 && _jumpHitboxes.IsOnGround;
@@ -114,9 +132,9 @@ namespace KatanaRed.Movement
         private void GroundLanded()
         {
             _isJumpEnd = true;
-            _remainingJumps = data.maxDefaultJumps;
-            _remainingAirJumps = data.maxAirJumps;
-            _remainingWallJumps = data.maxWallJumps;
+            _remainingJumps = jumpData.MaxJumps;
+            _remainingAirJumps = jumpData.MaxAirJumps;
+            _remainingWallJumps = wallJumpData.MaxJumps;
         }
     }
 }

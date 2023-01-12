@@ -17,7 +17,7 @@ namespace KatanaRed.Movement
             this.rb2d = rb2d;
         }
         
-        public abstract void Move(Vector2 direction, float dt);
+        public abstract void Move(Vector2 direction, float dt, bool canMove);
         
         protected float CalculateCurrentSpeed(Vector2 direction, float dt)
         {
