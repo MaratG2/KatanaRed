@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
 using KatanaRed.Scriptables;
 using UnityEngine;
@@ -59,29 +59,32 @@ namespace KatanaRed.Movement
             JumpAsync();
         }
 
-        private async Task JumpAsync()
+        private async UniTask JumpAsync()
         {
-            float currentTime = 0f;
-            float oldPositionY = rb2d.transform.position.y;
-            float totalHeight = 0f;
-            _oldMaxHeight = 0f;
             rb2d.gravityScale = data.jumpGravity;
-            
             float jumpForce = Mathf.Sqrt(data.maxJumpHeight * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
             rb2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            await WaitForJumpEnd();
+            rb2d.gravityScale = data.stopGravity;
+            await WaitForJumpPeak();
+            rb2d.gravityScale = data.fallGravity;
+        }
 
+        private async UniTask WaitForJumpEnd()
+        {
+            float oldPositionY = rb2d.transform.position.y;
+            float totalHeight;
             do
             {
                 totalHeight = rb2d.transform.position.y - oldPositionY;
-                currentTime += Time.fixedDeltaTime;
-                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
+                await UniTask.WaitForFixedUpdate();
             } while ((!_isJumpEnd || totalHeight < data.minJumpHeight) && rb2d.velocity.y > 0);
-            rb2d.gravityScale = data.stopGravity;
+        }
+
+        private async UniTask WaitForJumpPeak()
+        {
             while (rb2d.velocity.y > Mathf.Epsilon)
-            {
-                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
-            }
-            rb2d.gravityScale = data.fallGravity;
+                await UniTask.WaitForFixedUpdate();
         }
 
         private void AirJump()

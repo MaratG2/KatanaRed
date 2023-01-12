@@ -53,6 +53,12 @@ MonoBehaviour:
     - Sirenix.OdinInspector.Modules.UnityMathematics
     - UniRx
     - UniRx.Examples
+    - UniTask
+    - UniTask.Addressables
+    - UniTask.DOTween
+    - UniTask.Editor
+    - UniTask.Linq
+    - UniTask.TextMeshPro
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
