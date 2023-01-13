@@ -19,4 +19,4 @@ MonoBehaviour:
   _jumpGravity: 4
   _fallGravity: 6
   _stopGravity: 15
-  _maxJumps: 3
+  _maxJumps: 999999
