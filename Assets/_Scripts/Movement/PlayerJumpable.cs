@@ -94,10 +94,10 @@ namespace KatanaRed.Movement
             rb2d.AddForce(force, ForceMode2D.Impulse);
             await UniTask.Delay((int)(wallJumpData.JumpTime * 1000));
             rb2d.gravityScale = wallJumpData.StopGravity;
+            _movementInput.canMove = true;
             await WaitForJumpPeak();
             rb2d.gravityScale = wallJumpData.FallGravity;
             await UniTask.Delay((int)(wallJumpData.FallTime * 1000));
-            _movementInput.canMove = true;
         }
 
         private async UniTask WaitForJumpEnd()

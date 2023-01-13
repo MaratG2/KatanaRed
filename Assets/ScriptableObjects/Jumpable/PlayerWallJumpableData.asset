@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 10
   _jumpPositiveDirection: {x: 1, y: 1}
-  _jumpTime: 0.2
-  _fallTime: 0.2
+  _jumpTime: 0.15
+  _fallTime: 0.15
   _jumpGravity: 4
   _fallGravity: 6
   _stopGravity: 15
