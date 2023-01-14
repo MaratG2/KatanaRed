@@ -1,17 +1,17 @@
-﻿using KatanaRed.Scriptables;
+﻿using KatanaRed.Utils.Scriptables;
 using UnityEngine;
 
-namespace KatanaRed.Movement
+namespace KatanaRed.Movement.Jump
 {
     public abstract class Jumpable
     {
-        protected JumpableData jumpData;
-        protected WallJumpableData wallJumpData;
+        protected JumpSO jumpData;
+        protected WallJumpSO wallJumpData;
         protected Rigidbody2D rb2d;
         protected int _remainingJumps;
         protected int _remainingAirJumps;
         protected int _remainingWallJumps;
-        public Jumpable(JumpableData jumpData, WallJumpableData wallJumpData, Rigidbody2D rb2d)
+        public Jumpable(JumpSO jumpData, WallJumpSO wallJumpData, Rigidbody2D rb2d)
         {
             this.jumpData = jumpData;
             this.wallJumpData = wallJumpData;

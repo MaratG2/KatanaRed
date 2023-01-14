@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace KatanaRed.Movement
+namespace KatanaRed.Movement.Jump
 {
     public class JumpHitboxes : MonoBehaviour
     {

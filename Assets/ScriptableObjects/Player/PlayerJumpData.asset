@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec778ae910474a05a47543e558094185, type: 3}
-  m_Name: PlayerWallJumpableData
+  m_Script: {fileID: 11500000, guid: 6fcda6bd3d1943608aa4a9db26cd2cbd, type: 3}
+  m_Name: PlayerJumpData
   m_EditorClassIdentifier: 
-  _jumpForce: 10
-  _jumpPositiveDirection: {x: 1, y: 1}
-  _jumpTime: 0.15
-  _fallTime: 0.15
-  _jumpGravity: 4
-  _fallGravity: 6
-  _stopGravity: 15
-  _maxJumps: 999999
+  minJumpHeight: 1
+  maxJumpHeight: 3
+  jumpGravity: 4
+  fallGravity: 4.5
+  stopGravity: 15
+  maxDefaultJumps: 1
+  maxAirJumps: 0
+  maxWallJumps: 10

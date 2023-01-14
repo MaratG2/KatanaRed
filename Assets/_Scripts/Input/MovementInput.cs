@@ -1,5 +1,4 @@
 using System;
-using KatanaRed.Scriptables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

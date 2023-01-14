@@ -1,9 +1,8 @@
-using System.Runtime.CompilerServices;
 using Cinemachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace KatanaRed.Cameras
+namespace KatanaRed.Cam
 {
     public class ChangeCameraFromTrigger : MonoBehaviour
     {

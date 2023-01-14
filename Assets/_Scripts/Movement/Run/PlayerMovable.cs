@@ -1,11 +1,11 @@
-using KatanaRed.Scriptables;
+using KatanaRed.Utils.Scriptables;
 using UnityEngine;
 
-namespace KatanaRed.Movement
+namespace KatanaRed.Movement.Run
 {
     public class PlayerMovable : Movable
     {
-        public PlayerMovable(MovableData data, Rigidbody2D rb2d) : base(data, rb2d)
+        public PlayerMovable(RunSO data, Rigidbody2D rb2d) : base(data, rb2d)
         {
         }
 

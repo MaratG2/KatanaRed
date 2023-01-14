@@ -1,6 +1,7 @@
 using KatanaRed.Input;
-using KatanaRed.Movement;
-using KatanaRed.Scriptables;
+using KatanaRed.Movement.Jump;
+using KatanaRed.Movement.Run;
+using KatanaRed.Utils.Scriptables;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,9 +11,9 @@ namespace KatanaRed.Behaviours
     {
         [Header("Dependencies")] 
         [SerializeField, Required] private Rigidbody2D _rb2d;
-        [SerializeField, Required] private MovableData _movableData;
-        [SerializeField, Required] private JumpableData _jumpableData;
-        [SerializeField, Required] private WallJumpableData _wallJumpableData;
+        [SerializeField, Required] private RunSO _movableData;
+        [SerializeField, Required] private JumpSO _jumpSO;
+        [SerializeField, Required] private WallJumpSO _wallJumpSO;
         [SerializeField, Required] private JumpHitboxes _jumpHitboxes;
         private MovementInput _movementInput;
         private Movable _movable;
@@ -23,7 +24,7 @@ namespace KatanaRed.Behaviours
         {
             _movementInput = GetComponent<MovementInput>();
             _movable = new PlayerMovable(_movableData, _rb2d);
-            _jumpable = new PlayerJumpable(_jumpableData, _wallJumpableData, _rb2d, _movementInput, _jumpHitboxes);
+            _jumpable = new PlayerJumpable(_jumpSO, _wallJumpSO, _rb2d, _movementInput, _jumpHitboxes);
             _movementInput.canMove = true;
         }
 

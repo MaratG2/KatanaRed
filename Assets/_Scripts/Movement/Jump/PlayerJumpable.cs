@@ -1,9 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
-using KatanaRed.Scriptables;
+using KatanaRed.Utils.Scriptables;
 using UnityEngine;
 
-namespace KatanaRed.Movement
+namespace KatanaRed.Movement.Jump
 {
     public class PlayerJumpable : Jumpable
     {
@@ -12,7 +12,7 @@ namespace KatanaRed.Movement
         private bool _isJumpEnd;
         private float _oldMaxHeight = 0f;
         
-        public PlayerJumpable(JumpableData jumpData, WallJumpableData wallJumpData, 
+        public PlayerJumpable(JumpSO jumpData, WallJumpSO wallJumpData, 
             Rigidbody2D rb2d, MovementInput movementInput, JumpHitboxes jumpHitboxes) 
             : base(jumpData, wallJumpData, rb2d)
         {

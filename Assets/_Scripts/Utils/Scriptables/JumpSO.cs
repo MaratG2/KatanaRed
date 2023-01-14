@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace KatanaRed.Scriptables
+namespace KatanaRed.Utils.Scriptables
 {
-    [CreateAssetMenu(fileName = "JumpableData", menuName = "ScriptableObjects/JumpableData", order = 1)]
-    public class JumpableData : ScriptableObject
+    [CreateAssetMenu(fileName = "JumpData", menuName = "KatanaRed/ScriptableObjects/JumpData", order = 1)]
+    public class JumpSO : ScriptableObject
     {
         [SerializeField]
         private float _minJumpHeight = 1f;

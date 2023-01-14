@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace KatanaRed.Movement
+namespace KatanaRed.Movement.Jump
 {
     public class WallJumpEventWrapper : MonoBehaviour
     {

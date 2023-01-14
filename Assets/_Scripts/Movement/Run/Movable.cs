@@ -1,17 +1,17 @@
-using KatanaRed.Scriptables;
+using KatanaRed.Utils.Scriptables;
 using UnityEngine;
 
-namespace KatanaRed.Movement
+namespace KatanaRed.Movement.Run
 {
     public abstract class Movable
     {
         public Rigidbody2D Rb2d => rb2d;
-        protected MovableData data;
+        protected RunSO data;
         protected Rigidbody2D rb2d;
         protected float currentSpeed = 0;
         private float _oldSign = 1f;
         
-        public Movable(MovableData data, Rigidbody2D rb2d)
+        public Movable(RunSO data, Rigidbody2D rb2d)
         {
             this.data = data;
             this.rb2d = rb2d;

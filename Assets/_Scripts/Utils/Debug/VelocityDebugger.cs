@@ -1,9 +1,8 @@
 using KatanaRed.Behaviours;
-using KatanaRed.Input;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace KatanaRed.Utils
+namespace KatanaRed.Utils.Debug
 {
     public class VelocityDebugger : MonoBehaviour
     {
