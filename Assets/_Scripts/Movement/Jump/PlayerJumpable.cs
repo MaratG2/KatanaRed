@@ -8,26 +8,26 @@ namespace KatanaRed.Movement.Jump
     public class PlayerJumpable : Jumpable
     {
         private MovementInput _movementInput;
-        private JumpHitboxes _jumpHitboxes;
+        private GroundWallCollision _groundWallCollision;
         private bool _isJumpEnd;
         private float _oldMaxHeight = 0f;
         
         public PlayerJumpable(JumpSO jumpData, WallJumpSO wallJumpData, 
-            Rigidbody2D rb2d, MovementInput movementInput, JumpHitboxes jumpHitboxes) 
+            Rigidbody2D rb2d, MovementInput movementInput, GroundWallCollision groundWallCollision) 
             : base(jumpData, wallJumpData, rb2d)
         {
             this._movementInput = movementInput;
-            this._jumpHitboxes = jumpHitboxes;
+            this._groundWallCollision = groundWallCollision;
             _movementInput.OnJumpBegin += JumpBegin;
             _movementInput.OnJumpEnd += JumpEnd;
-            _jumpHitboxes.OnGroundLanded += GroundLanded;
+            _groundWallCollision.OnGroundLanded += GroundLanded;
         }
 
         ~PlayerJumpable()
         {
             _movementInput.OnJumpBegin -= JumpBegin;
             _movementInput.OnJumpEnd -= JumpEnd;
-            _jumpHitboxes.OnGroundLanded -= GroundLanded;
+            _groundWallCollision.OnGroundLanded -= GroundLanded;
         }
 
         public override void JumpBegin()
@@ -87,7 +87,7 @@ namespace KatanaRed.Movement.Jump
         {
             _movementInput.canMove = false;
             rb2d.gravityScale = wallJumpData.JumpGravity;
-            int direction = _jumpHitboxes.IsOnLeft ? 1 : -1;
+            int direction = _groundWallCollision.IsOnLeft ? 1 : -1;
             float jumpForce = Mathf.Sqrt(wallJumpData.JumpForce * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
             Vector2 force = jumpForce * wallJumpData.JumpPositiveDirection.normalized;
             force = new Vector2(force.x * direction, force.y);
@@ -118,15 +118,15 @@ namespace KatanaRed.Movement.Jump
 
         private bool CanJump()
         {
-            return _remainingJumps >= 1 && _jumpHitboxes.IsOnGround;
+            return _remainingJumps >= 1 && _groundWallCollision.IsOnGround;
         }
         private bool CanAirJump()
         {
-            return _remainingAirJumps >= 1 && !_jumpHitboxes.IsOnGround && !_jumpHitboxes.IsOnWall;
+            return _remainingAirJumps >= 1 && !_groundWallCollision.IsOnGround && !_groundWallCollision.IsOnWall;
         }
         private bool CanWallJump()
         {
-            return _remainingWallJumps >= 1 && !_jumpHitboxes.IsOnGround &&  _jumpHitboxes.IsOnWall;
+            return _remainingWallJumps >= 1 && !_groundWallCollision.IsOnGround &&  _groundWallCollision.IsOnWall;
         }
 
         private void GroundLanded()

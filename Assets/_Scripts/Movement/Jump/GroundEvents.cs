@@ -3,30 +3,29 @@ using UnityEngine;
 
 namespace KatanaRed.Movement.Jump
 {
-    public class WallJumpEventWrapper : MonoBehaviour
+    public class GroundEvents : MonoBehaviour
     {
-        [SerializeField] private int _wallLayerMask;
+        [SerializeField] private int _groundLayerMask;
         [SerializeField] private int _mixedLayerMask;
-        [SerializeField] private bool _isLeft;
-        public Action<bool> OnWallEntered;
-        public Action OnWallExited;
+        public Action OnGroundEntered { get; set; }
+        public Action OnGroundExited { get; set; }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.layer != _wallLayerMask
+            if (col.gameObject.layer != _groundLayerMask
                 && col.gameObject.layer != _mixedLayerMask)
                 return;
             
-            OnWallEntered?.Invoke(_isLeft);
+            OnGroundEntered?.Invoke();
         }
 
         private void OnTriggerExit2D(Collider2D col)
         {
-            if (col.gameObject.layer != _wallLayerMask
+            if (col.gameObject.layer != _groundLayerMask
                 && col.gameObject.layer != _mixedLayerMask)
                 return;
             
-            OnWallExited?.Invoke();
+            OnGroundExited?.Invoke();
         }
     }
 }

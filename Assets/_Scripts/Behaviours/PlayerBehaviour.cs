@@ -4,6 +4,7 @@ using KatanaRed.Movement.Run;
 using KatanaRed.Utils.Scriptables;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace KatanaRed.Behaviours
 {
@@ -14,7 +15,7 @@ namespace KatanaRed.Behaviours
         [SerializeField, Required] private RunSO _movableData;
         [SerializeField, Required] private JumpSO _jumpSO;
         [SerializeField, Required] private WallJumpSO _wallJumpSO;
-        [SerializeField, Required] private JumpHitboxes _jumpHitboxes;
+        [SerializeField, Required] private GroundWallCollision _groundWallCollision;
         private MovementInput _movementInput;
         private Movable _movable;
         private Jumpable _jumpable;
@@ -24,7 +25,7 @@ namespace KatanaRed.Behaviours
         {
             _movementInput = GetComponent<MovementInput>();
             _movable = new PlayerMovable(_movableData, _rb2d);
-            _jumpable = new PlayerJumpable(_jumpSO, _wallJumpSO, _rb2d, _movementInput, _jumpHitboxes);
+            _jumpable = new PlayerJumpable(_jumpSO, _wallJumpSO, _rb2d, _movementInput, _groundWallCollision);
             _movementInput.canMove = true;
         }
 
