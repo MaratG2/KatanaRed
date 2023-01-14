@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KatanaRed.Movement.Run
 {
-    public abstract class Movable : MonoBehaviour
+    public abstract class Runable : MonoBehaviour
     {
         [Header("Dependencies")]
         [SerializeField, Required] protected RunSO runData;
@@ -13,7 +13,7 @@ namespace KatanaRed.Movement.Run
         protected float currentSpeed = 0;
         private float _oldSign = 1f;
 
-        public abstract void Move(Vector2 direction, float dt, bool canMove);
+        public abstract void Run(Vector2 direction, float dt, bool canMove);
         
         protected float CalculateCurrentSpeed(Vector2 direction, float dt)
         {

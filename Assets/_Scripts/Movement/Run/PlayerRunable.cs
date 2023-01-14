@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace KatanaRed.Movement.Run
 {
-    public class PlayerMovable : Movable
+    public class PlayerRunable : Runable
     {
         [SerializeField, Required] private MovementInput _movementInput;
-        public override void Move(Vector2 direction, float dt, bool canMove)
+        public override void Run(Vector2 direction, float dt, bool canMove)
         {
             if (!canMove || rb2d.velocity.x.Equals(0f) && currentSpeed.Equals(0f) && direction.x.Equals(0f))
                 return;
@@ -22,7 +22,7 @@ namespace KatanaRed.Movement.Run
         }
         private void FixedUpdate()
         {
-           Move(_movementInput.Movement, Time.fixedDeltaTime, _movementInput.canMove);
+            Run(_movementInput.Movement, Time.fixedDeltaTime, _movementInput.canMove);
         }
     }
 }

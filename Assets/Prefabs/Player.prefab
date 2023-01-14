@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDebugOn: 0
-  _playerMovable: {fileID: 0}
+  _runable: {fileID: 2484974365917893273}
   _movementLine: {fileID: 1363736614507006562}
 --- !u!114 &8961250617989637698
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDebugOn: 0
-  _groundWallCollision: {fileID: 0}
+  _groundWallCollision: {fileID: 313414197}
   _bottomHitbox: {fileID: 2534613428503953478}
   _leftHitbox: {fileID: 7070904058301573239}
   _rightHitbox: {fileID: 6813054982864094479}
