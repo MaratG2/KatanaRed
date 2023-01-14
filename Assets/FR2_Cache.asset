@@ -53,7 +53,7 @@ MonoBehaviour:
     UseGUIDsList: []
   - guid: 0000000000000000b000000000000000
     loadInfoTS: 0
-    stamp: 1672742560
+    stamp: 1673712748
     type: 5
     UseGUIDsList:
     - guid: 8c9cfa26abfee488c85f1582747f6a02
@@ -28811,7 +28811,7 @@ MonoBehaviour:
       ids: 30000000
   - guid: 8c9cfa26abfee488c85f1582747f6a02
     loadInfoTS: 0
-    stamp: 1673712393
+    stamp: 0
     type: 3
     UseGUIDsList:
     - guid: 60ddcbd9f6bff994880ba8468464d7e0
