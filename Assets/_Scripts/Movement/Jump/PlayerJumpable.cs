@@ -8,7 +8,6 @@ namespace KatanaRed.Movement.Jump
 {
     public class PlayerJumpable : Jumpable
     {
-        [Header("Dependencies")]
         [SerializeField, Required] private MovementInput _movementInput;
         [SerializeField, Required] private GroundWallCollision _groundWallCollision;
         private bool _isJumpEnd;
