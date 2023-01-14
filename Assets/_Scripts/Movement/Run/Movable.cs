@@ -1,32 +1,28 @@
 using KatanaRed.Utils.Scriptables;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace KatanaRed.Movement.Run
 {
-    public abstract class Movable
+    public abstract class Movable : MonoBehaviour
     {
+        [Header("Dependencies")]
+        [SerializeField, Required] protected RunSO runData;
+        [SerializeField, Required] protected Rigidbody2D rb2d;
         public Rigidbody2D Rb2d => rb2d;
-        protected RunSO data;
-        protected Rigidbody2D rb2d;
         protected float currentSpeed = 0;
         private float _oldSign = 1f;
-        
-        public Movable(RunSO data, Rigidbody2D rb2d)
-        {
-            this.data = data;
-            this.rb2d = rb2d;
-        }
-        
+
         public abstract void Move(Vector2 direction, float dt, bool canMove);
         
         protected float CalculateCurrentSpeed(Vector2 direction, float dt)
         {
             if (Mathf.Abs(direction.x) > 0f)
-                currentSpeed += data.acceleration * dt;
+                currentSpeed += runData.acceleration * dt;
             else 
-                currentSpeed -= data.decceleration * dt;
+                currentSpeed -= runData.decceleration * dt;
 
-            currentSpeed = Mathf.Clamp(currentSpeed, 0f, data.maxSpeed);
+            currentSpeed = Mathf.Clamp(currentSpeed, 0f, runData.maxSpeed);
             return currentSpeed;
         }
         

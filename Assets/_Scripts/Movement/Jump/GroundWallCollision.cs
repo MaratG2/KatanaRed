@@ -6,6 +6,7 @@ namespace KatanaRed.Movement.Jump
 {
     public class GroundWallCollision : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField, Required] private GroundEvents _groundEvents;
         [SerializeField, Required] private WallEvents[] _wallsEvents;
         public Action OnGroundLanded { get; set; }

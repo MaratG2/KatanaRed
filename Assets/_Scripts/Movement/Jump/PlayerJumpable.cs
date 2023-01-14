@@ -1,23 +1,22 @@
 ﻿using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
 using KatanaRed.Utils.Scriptables;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace KatanaRed.Movement.Jump
 {
     public class PlayerJumpable : Jumpable
     {
-        private MovementInput _movementInput;
-        private GroundWallCollision _groundWallCollision;
+        [Header("Dependencies")]
+        [SerializeField, Required] private MovementInput _movementInput;
+        [SerializeField, Required] private GroundWallCollision _groundWallCollision;
         private bool _isJumpEnd;
         private float _oldMaxHeight = 0f;
-        
-        public PlayerJumpable(JumpSO jumpData, WallJumpSO wallJumpData, 
-            Rigidbody2D rb2d, MovementInput movementInput, GroundWallCollision groundWallCollision) 
-            : base(jumpData, wallJumpData, rb2d)
+
+        protected override void Awake()
         {
-            this._movementInput = movementInput;
-            this._groundWallCollision = groundWallCollision;
+            base.Awake();
             _movementInput.OnJumpBegin += JumpBegin;
             _movementInput.OnJumpEnd += JumpEnd;
             _groundWallCollision.OnGroundLanded += GroundLanded;

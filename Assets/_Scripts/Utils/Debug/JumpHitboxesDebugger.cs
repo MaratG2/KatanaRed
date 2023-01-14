@@ -8,6 +8,7 @@ namespace KatanaRed.Utils.Debug
     public class JumpHitboxesDebugger : MonoBehaviour
     {
         [SerializeField] private bool _isDebugOn;
+        [Header("Dependencies")]
         [SerializeField, Required] private GroundWallCollision _groundWallCollision;
         [SerializeField, Required] private SpriteRenderer _bottomHitbox;
         [SerializeField, Required] private SpriteRenderer _leftHitbox;

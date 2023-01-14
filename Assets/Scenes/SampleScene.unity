@@ -114974,7 +114974,8 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 211083603}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 674411402, guid: ef2e671a41074e549af74961ee50990a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

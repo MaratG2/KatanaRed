@@ -5,6 +5,7 @@ namespace KatanaRed.Movement.Jump
 {
     public class WallEvents : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private int _wallLayerMask;
         [SerializeField] private int _mixedLayerMask;
         [SerializeField] private bool _isLeft;

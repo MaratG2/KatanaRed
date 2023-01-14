@@ -1,26 +1,27 @@
-﻿using KatanaRed.Utils.Scriptables;
+﻿using System;
+using KatanaRed.Utils.Scriptables;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace KatanaRed.Movement.Jump
 {
-    public abstract class Jumpable
+    public abstract class Jumpable : MonoBehaviour
     {
-        protected JumpSO jumpData;
-        protected WallJumpSO wallJumpData;
-        protected Rigidbody2D rb2d;
+        [Header("Dependencies")]
+        [SerializeField, Required] protected JumpSO jumpData;
+        [SerializeField, Required] protected WallJumpSO wallJumpData;
+        [SerializeField, Required] protected Rigidbody2D rb2d;
         protected int _remainingJumps;
         protected int _remainingAirJumps;
         protected int _remainingWallJumps;
-        public Jumpable(JumpSO jumpData, WallJumpSO wallJumpData, Rigidbody2D rb2d)
+
+        protected virtual void Awake()
         {
-            this.jumpData = jumpData;
-            this.wallJumpData = wallJumpData;
-            this.rb2d = rb2d;
             _remainingJumps = jumpData.MaxJumps;
             _remainingAirJumps = jumpData.MaxAirJumps;
             _remainingWallJumps = wallJumpData.MaxJumps;
         }
-        
+
         public abstract void JumpBegin();
         public abstract void JumpEnd();
     }
