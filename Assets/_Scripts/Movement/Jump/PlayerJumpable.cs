@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
-using KatanaRed.Utils.Scriptables;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

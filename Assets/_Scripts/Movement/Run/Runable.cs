@@ -13,7 +13,7 @@ namespace KatanaRed.Movement.Run
         protected float currentSpeed = 0;
         private float _oldSign = 1f;
 
-        public abstract void Run(Vector2 direction, float dt, bool canMove);
+        public abstract void Run(Vector2 direction, float dt);
         
         protected float CalculateCurrentSpeed(Vector2 direction, float dt)
         {
