@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
+using KatanaRed.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace KatanaRed.Movement.Jump
     {
         [SerializeField, Required] private MovementInput _movementInput;
         [SerializeField, Required] private GroundWallCollision _groundWallCollision;
+        [SerializeField, Required] private StatesContainer _statesContainer;
         private bool _isJumpEnd;
         private float _oldMaxHeight = 0f;
 

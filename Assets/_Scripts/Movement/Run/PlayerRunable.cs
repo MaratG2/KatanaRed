@@ -1,4 +1,5 @@
 using KatanaRed.Input;
+using KatanaRed.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace KatanaRed.Movement.Run
     public class PlayerRunable : Runable
     {
         [SerializeField, Required] private MovementInput _movementInput;
-        
+        [SerializeField, Required] private StatesContainer _statesContainer;
         private void Awake()
         {
             _movementInput.canMove = true;
