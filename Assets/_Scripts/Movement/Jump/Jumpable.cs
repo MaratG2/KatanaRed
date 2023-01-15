@@ -1,5 +1,4 @@
-﻿using System;
-using KatanaRed.Utils.Scriptables;
+﻿using KatanaRed.Utils.Scriptables;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

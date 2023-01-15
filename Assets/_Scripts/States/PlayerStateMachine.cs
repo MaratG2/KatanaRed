@@ -6,8 +6,7 @@ namespace KatanaRed.States
     {
         protected void Awake()
         {
-            InitStateMachine(new PlayerState());
-            SetStateTo(PlayerStateEnum.Alive);
+            InitStateMachine(new PlayerState(), PlayerStateEnum.Alive);
         }
     }
 }

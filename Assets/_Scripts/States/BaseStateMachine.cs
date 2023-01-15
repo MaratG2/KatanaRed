@@ -10,18 +10,33 @@ namespace KatanaRed.States
         private BaseState _state;
         public Action OnStateChanged;
 
-        public virtual void InitStateMachine(BaseState state)
+        public virtual void InitStateMachine(BaseState state, Enum initState)
         {
             this._state = state;
+            SetStateTo(initState);
+            if(_isDebugOn)
+                DebugLogStateChanged();
         }
         public virtual void SetStateTo(Enum newState)
         {
+            if (CheckStateIs(newState))
+                return;
+            
             _state.State = newState;
             OnStateChanged?.Invoke();
         }
-        public virtual bool CheckStateIs(Enum checkState)
+        public virtual bool CheckStateIs(params Enum[] checkStates)
         {
-            return _state.State.Equals(checkState);
+            bool equals = false;
+            foreach (var checkState in checkStates)
+            {
+                if(_state == null || _state.State == null)
+                    continue;
+                
+                if (_state.State.Equals(checkState))
+                    equals = true;
+            }
+            return equals;
         }
 
         protected virtual void OnEnable()

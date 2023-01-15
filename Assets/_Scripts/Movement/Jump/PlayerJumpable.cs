@@ -1,6 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
 using KatanaRed.States;
+using KatanaRed.Utils.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,17 +14,15 @@ namespace KatanaRed.Movement.Jump
         [SerializeField, Required] private GroundWallCollision _groundWallCollision;
         [SerializeField, Required] private StatesContainer _statesContainer;
         private bool _isJumpEnd;
-        private float _oldMaxHeight = 0f;
-
-        protected override void Awake()
+        
+        private void OnEnable()
         {
-            base.Awake();
             _movementInput.OnJumpBegin += JumpBegin;
             _movementInput.OnJumpEnd += JumpEnd;
             _groundWallCollision.OnGroundLanded += GroundLanded;
         }
 
-        ~PlayerJumpable()
+        private void OnDisable()
         {
             _movementInput.OnJumpBegin -= JumpBegin;
             _movementInput.OnJumpEnd -= JumpEnd;
@@ -31,6 +31,8 @@ namespace KatanaRed.Movement.Jump
 
         public override void JumpBegin()
         {
+            if (!StateAbleJump())
+                return;
             if(CanJump())
             {
                 Jump(true);
@@ -56,18 +58,21 @@ namespace KatanaRed.Movement.Jump
             if(lowerRemaining)
                 _remainingJumps--;
             
+            _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.Jump);
             _isJumpEnd = false;
             JumpAsync();
         }
         private void AirJump()
         {
             _remainingAirJumps--;
+            _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.AirJump);
             Jump(false);
         }
         private void WallJump()
         {
             _remainingWallJumps--;
             _isJumpEnd = false;
+            _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.WallJump);
             WallJumpAsync();
         }
 
@@ -115,6 +120,11 @@ namespace KatanaRed.Movement.Jump
                 await UniTask.WaitForFixedUpdate();
         }
 
+        private bool StateAbleJump()
+        {
+            return _statesContainer.LevelSM.CheckStateIs(LevelStateEnum.Start)
+                   && _statesContainer.PlayerSM.CheckStateIs(PlayerStateEnum.Alive);
+        }
         private bool CanJump()
         {
             return _remainingJumps >= 1 && _groundWallCollision.IsOnGround;
@@ -130,6 +140,9 @@ namespace KatanaRed.Movement.Jump
 
         private void GroundLanded()
         {
+            if(!_statesContainer.PlayerMovementSM.CheckStateIs(PlayerMovementStateEnum.Run))
+                _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.Idle);
+            
             _isJumpEnd = true;
             _remainingJumps = jumpData.MaxJumps;
             _remainingAirJumps = jumpData.MaxAirJumps;
