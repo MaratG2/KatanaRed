@@ -4,9 +4,8 @@ namespace KatanaRed.States
 {
     public class LevelStateMachine : BaseStateMachine
     {
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             InitStateMachine(new LevelState());
             SetStateTo(LevelStateEnum.Start);
         }

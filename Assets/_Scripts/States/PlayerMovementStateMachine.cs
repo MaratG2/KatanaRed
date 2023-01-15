@@ -6,9 +6,8 @@ namespace KatanaRed.States
 {
     public class PlayerMovementStateMachine : BaseStateMachine
     {
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             InitStateMachine(new PlayerMovementState());
             SetStateTo(PlayerMovementStateEnum.Idle);
         }

@@ -24,13 +24,13 @@ namespace KatanaRed.States
             return _state.State.Equals(checkState);
         }
 
-        protected virtual void Awake()
+        protected virtual void OnEnable()
         {
             if (_isDebugOn)
                 OnStateChanged += DebugLogStateChanged;
         }
 
-        protected void OnDestroy()
+        protected virtual void OnDisable()
         {
             if (_isDebugOn)
                 OnStateChanged -= DebugLogStateChanged;
