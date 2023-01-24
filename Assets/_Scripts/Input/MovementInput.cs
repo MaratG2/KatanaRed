@@ -6,7 +6,6 @@ namespace KatanaRed.Input
 {
     public class MovementInput : MonoBehaviour
     {
-        [HideInInspector] public bool canMove = true;
         public Vector2 Movement { get; private set; } = Vector2.zero;
         public Action OnJumpBegin;
         public Action OnJumpEnd;

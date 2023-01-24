@@ -10,10 +10,7 @@ namespace KatanaRed.Movement.Run
     {
         [SerializeField, Required] private MovementInput _movementInput;
         [SerializeField, Required] private StatesContainer _statesContainer;
-        private void Awake()
-        {
-            _movementInput.canMove = true;
-        }
+   
         private void FixedUpdate()
         {
             Run(_movementInput.Movement, Time.fixedDeltaTime);

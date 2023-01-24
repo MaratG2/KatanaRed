@@ -89,7 +89,9 @@ namespace KatanaRed.Movement.Jump
         
         private async UniTask WallJumpAsync()
         {
-            _movementInput.canMove = false;
+            _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.ToSide);
+            float progress = 0f;
+            
             rb2d.gravityScale = wallJumpData.JumpGravity;
             int direction = _groundWallCollision.IsOnLeft ? 1 : -1;
             float jumpForce = Mathf.Sqrt(wallJumpData.JumpForce * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
@@ -98,7 +100,6 @@ namespace KatanaRed.Movement.Jump
             rb2d.AddForce(force, ForceMode2D.Impulse);
             await UniTask.Delay((int)(wallJumpData.JumpTime * 1000));
             rb2d.gravityScale = wallJumpData.StopGravity;
-            _movementInput.canMove = true;
             await WaitForJumpPeak();
             rb2d.gravityScale = wallJumpData.FallGravity;
             await UniTask.Delay((int)(wallJumpData.FallTime * 1000));
