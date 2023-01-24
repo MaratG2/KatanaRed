@@ -2,6 +2,7 @@
 {
     public enum PlayerWallJumpStateEnum
     {
+        None,
         ToSide,
         ToBack,
         ToTop,

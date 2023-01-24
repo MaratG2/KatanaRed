@@ -7,7 +7,7 @@ namespace KatanaRed.States
         protected void Awake()
         {
             InitStateMachine(new PlayerWallJumpState(), 
-                PlayerWallJumpStateEnum.ToSide);
+                PlayerWallJumpStateEnum.None);
         }
     }
 }

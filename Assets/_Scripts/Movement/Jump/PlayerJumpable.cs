@@ -89,20 +89,53 @@ namespace KatanaRed.Movement.Jump
         
         private async UniTask WallJumpAsync()
         {
-            _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.ToSide);
             float progress = 0f;
-            
-            rb2d.gravityScale = wallJumpData.JumpGravity;
-            int direction = _groundWallCollision.IsOnLeft ? 1 : -1;
-            float jumpForce = Mathf.Sqrt(wallJumpData.JumpForce * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
-            Vector2 force = jumpForce * wallJumpData.JumpPositiveDirection.normalized;
-            force = new Vector2(force.x * direction, force.y);
-            rb2d.AddForce(force, ForceMode2D.Impulse);
-            await UniTask.Delay((int)(wallJumpData.JumpTime * 1000));
+            //ToSide
+            DoWallJump(PlayerWallJumpStateEnum.ToSide, wallJumpData.TSJumpGravity,
+                wallJumpData.TSJumpForce, wallJumpData.TSJumpDirection, false);
+            await UniTask.Delay((int)(wallJumpData.TSJumpTime * 1000));
+            //ToBack
+            if (true) //if (Input.back)
+            {
+                DoWallJump(PlayerWallJumpStateEnum.ToBack, wallJumpData.TSJumpGravity,
+                    wallJumpData.TSJumpForce, wallJumpData.TSJumpDirection, true);
+                await UniTask.Delay((int)(wallJumpData.TBJumpTime * 1000));
+            }
+            //ToTop
+            if (true) //if (Input.top)
+            {
+                DoWallJump(PlayerWallJumpStateEnum.ToTop, wallJumpData.TTJumpGravity,
+                    wallJumpData.TTJumpForce, wallJumpData.TTJumpDirection, true);
+                await UniTask.Delay((int)(wallJumpData.TTJumpTime * 1000));
+            }
+            //ToContinue
+            if (true) //if (Input.continue)
+            {
+                DoWallJump(PlayerWallJumpStateEnum.ToContinue, wallJumpData.TCJumpGravity,
+                    wallJumpData.TCJumpForce, wallJumpData.TCJumpDirection, true);
+                await UniTask.Delay((int)(wallJumpData.TCJumpTime * 1000));
+            }
             rb2d.gravityScale = wallJumpData.StopGravity;
             await WaitForJumpPeak();
             rb2d.gravityScale = wallJumpData.FallGravity;
-            await UniTask.Delay((int)(wallJumpData.FallTime * 1000));
+        }
+
+        private void DoWallJump(PlayerWallJumpStateEnum newState, float gravity, float force, Vector2 dir, bool isReversedDir)
+        {
+            _statesContainer.PlayerWallJumpSM.SetStateTo(newState);
+            rb2d.gravityScale = gravity;
+            Vector2 forceDir = CalculateForceDir(force, dir, isReversedDir);
+            rb2d.AddForce(forceDir, ForceMode2D.Impulse);
+        }
+
+        private Vector2 CalculateForceDir(float force, Vector2 dir, bool isReversedDir)
+        {
+            int direction = _groundWallCollision.IsOnLeft ? 1 : -1;
+            if (isReversedDir)
+                direction *= -1;
+            float jumpForce = Mathf.Sqrt(force * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
+            Vector2 forceDir = jumpForce * dir.normalized;
+            return new Vector2(forceDir.x * direction, forceDir.y);
         }
 
         private async UniTask WaitForJumpEnd()
