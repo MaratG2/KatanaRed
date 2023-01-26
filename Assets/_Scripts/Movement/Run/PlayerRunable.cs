@@ -44,7 +44,11 @@ namespace KatanaRed.Movement.Run
                        PlayerMovementStateEnum.Run,
                        PlayerMovementStateEnum.Jump,
                        PlayerMovementStateEnum.AirJump,
-                       PlayerMovementStateEnum.WallSlide);
+                       PlayerMovementStateEnum.WallJump,
+                       PlayerMovementStateEnum.WallSlide)
+                   && _statesContainer.PlayerWallJumpSM.CheckStateIs
+                   (PlayerWallJumpStateEnum.None,
+                       PlayerWallJumpStateEnum.ToTop);
         }
         
         private bool HaveNoInput(Vector2 direction)

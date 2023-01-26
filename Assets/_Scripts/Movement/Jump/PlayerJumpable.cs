@@ -90,49 +90,54 @@ namespace KatanaRed.Movement.Jump
         private async UniTask WallJumpAsync()
         {
             float progress = 0f;
+            int oldDirection = _groundWallCollision.IsOnLeft ? 1 : -1;
             //ToSide
             DoWallJump(PlayerWallJumpStateEnum.ToSide, wallJumpData.TSJumpGravity,
-                wallJumpData.TSJumpForce, wallJumpData.TSJumpDirection, false);
+                wallJumpData.TSJumpForce, wallJumpData.TSJumpDirection);
             await UniTask.Delay((int)(wallJumpData.TSJumpTime * 1000));
             //ToBack
-            if (true) //if (Input.back)
+            if (!Mathf.Sign(_movementInput.Movement.x).Equals(oldDirection))
             {
-                DoWallJump(PlayerWallJumpStateEnum.ToBack, wallJumpData.TSJumpGravity,
-                    wallJumpData.TSJumpForce, wallJumpData.TSJumpDirection, true);
+                DoWallJump(PlayerWallJumpStateEnum.ToBack, wallJumpData.TBJumpGravity,
+                    wallJumpData.TBJumpForce, wallJumpData.TBJumpDirection);
                 await UniTask.Delay((int)(wallJumpData.TBJumpTime * 1000));
             }
             //ToTop
-            if (true) //if (Input.top)
+            else if (Mathf.Abs(_movementInput.Movement.x) < Mathf.Epsilon)
             {
                 DoWallJump(PlayerWallJumpStateEnum.ToTop, wallJumpData.TTJumpGravity,
-                    wallJumpData.TTJumpForce, wallJumpData.TTJumpDirection, true);
+                    wallJumpData.TTJumpForce, wallJumpData.TTJumpDirection);
                 await UniTask.Delay((int)(wallJumpData.TTJumpTime * 1000));
             }
             //ToContinue
-            if (true) //if (Input.continue)
+            else if (Mathf.Sign(_movementInput.Movement.x).Equals(oldDirection))
             {
                 DoWallJump(PlayerWallJumpStateEnum.ToContinue, wallJumpData.TCJumpGravity,
-                    wallJumpData.TCJumpForce, wallJumpData.TCJumpDirection, true);
-                await UniTask.Delay((int)(wallJumpData.TCJumpTime * 1000));
+                    wallJumpData.TCJumpForce, wallJumpData.TCJumpDirection);
+                for (int i = 0; i < 1000; i++)
+                {
+                    if(!Mathf.Sign(_movementInput.Movement.x).Equals(oldDirection))
+                        _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.None);
+                    await UniTask.Delay((int)(wallJumpData.TCJumpTime));
+                }
             }
             rb2d.gravityScale = wallJumpData.StopGravity;
             await WaitForJumpPeak();
             rb2d.gravityScale = wallJumpData.FallGravity;
         }
 
-        private void DoWallJump(PlayerWallJumpStateEnum newState, float gravity, float force, Vector2 dir, bool isReversedDir)
+        private void DoWallJump(PlayerWallJumpStateEnum newState, float gravity, float force, Vector2 dir)
         {
             _statesContainer.PlayerWallJumpSM.SetStateTo(newState);
+            rb2d.velocity = Vector2.zero;
             rb2d.gravityScale = gravity;
-            Vector2 forceDir = CalculateForceDir(force, dir, isReversedDir);
+            Vector2 forceDir = CalculateForceDir(force, dir);
             rb2d.AddForce(forceDir, ForceMode2D.Impulse);
         }
 
-        private Vector2 CalculateForceDir(float force, Vector2 dir, bool isReversedDir)
+        private Vector2 CalculateForceDir(float force, Vector2 dir)
         {
             int direction = _groundWallCollision.IsOnLeft ? 1 : -1;
-            if (isReversedDir)
-                direction *= -1;
             float jumpForce = Mathf.Sqrt(force * -2 * (Physics2D.gravity.y * rb2d.gravityScale));
             Vector2 forceDir = jumpForce * dir.normalized;
             return new Vector2(forceDir.x * direction, forceDir.y);

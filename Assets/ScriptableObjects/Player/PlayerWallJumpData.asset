@@ -12,11 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec778ae910474a05a47543e558094185, type: 3}
   m_Name: PlayerWallJumpData
   m_EditorClassIdentifier: 
-  _jumpForce: 10
-  _jumpPositiveDirection: {x: 1, y: 1}
-  _jumpTime: 0.15
-  _fallTime: 0.15
-  _jumpGravity: 4
+  _tsJumpForce: 6
+  _tsJumpDirection: {x: 1, y: 1}
+  _tsJumpTime: 0.15
+  _tsJumpGravity: 4
+  _tbJumpForce: 6
+  _tbJumpDirection: {x: -1, y: 1}
+  _tbJumpTime: 0.15
+  _tbJumpGravity: 4
+  _ttJumpForce: 6
+  _ttJumpDirection: {x: 0, y: 1}
+  _ttJumpTime: 1
+  _ttJumpGravity: 4
+  _tcJumpForce: 6
+  _tcJumpDirection: {x: 1.25, y: 1}
+  _tcJumpTime: 1
+  _tcJumpGravity: 4
   _fallGravity: 6
   _stopGravity: 15
   _maxJumps: 999999
