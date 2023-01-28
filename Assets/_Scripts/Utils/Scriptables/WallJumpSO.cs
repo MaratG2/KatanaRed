@@ -25,13 +25,7 @@ namespace KatanaRed.Utils.Scriptables
         private float _tbJumpGravity = 4f;
         [Header("ToTop")]
         [SerializeField]
-        private float _ttJumpForce = 1f;
-        [SerializeField]
-        private Vector2 _ttJumpDirection = Vector2.right;
-        [SerializeField]
-        private float _ttJumpTime = 1f;
-        [SerializeField]
-        private float _ttJumpGravity = 4f;
+        private float _ttJumpMulti = 1f;
         [Header("ToContinue")]
         [SerializeField]
         private float _tcJumpForce = 1f;
@@ -57,10 +51,7 @@ namespace KatanaRed.Utils.Scriptables
         public Vector2 TBJumpDirection => _tbJumpDirection;
         public float TBJumpTime => _tbJumpTime;
         public float TBJumpGravity => _tbJumpGravity;
-        public float TTJumpForce => _ttJumpForce;
-        public Vector2 TTJumpDirection => _ttJumpDirection;
-        public float TTJumpTime => _ttJumpTime;
-        public float TTJumpGravity => _ttJumpGravity;
+        public float TTJumpMulti => _ttJumpMulti;
         public float TCJumpForce => _tcJumpForce;
         public Vector2 TCJumpDirection => _tcJumpDirection;
         public float TCJumpTime => _tcJumpTime;
