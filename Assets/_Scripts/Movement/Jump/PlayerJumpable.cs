@@ -1,8 +1,6 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
 using KatanaRed.States;
-using KatanaRed.Utils;
 using KatanaRed.Utils.Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -119,11 +117,17 @@ namespace KatanaRed.Movement.Jump
             {
                 DoWallJump(PlayerWallJumpStateEnum.ToContinue, wallJumpData.TCJumpGravity,
                     wallJumpData.TCJumpForce, wallJumpData.TCJumpDirection);
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     if(!Mathf.Sign(_movementInput.Movement.x).Equals(oldDirection))
                         _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.None);
-                    await UniTask.Delay((int)(wallJumpData.TCJumpTime));
+                    if (_groundWallCollision.IsOnWall)
+                    {
+                        //rb2d.velocity = Vector2.zero;
+                        //rb2d.gravityScale = wallJumpData.FallGravity;
+                        _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.None);
+                    }
+                    await UniTask.Delay((int)(wallJumpData.TCJumpTime * 10f));
                 }
             }
             if(!skip)
