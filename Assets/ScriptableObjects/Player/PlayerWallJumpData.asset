@@ -21,10 +21,10 @@ MonoBehaviour:
   _tbJumpTime: 0.15
   _tbJumpGravity: 4
   _ttJumpMulti: 1
-  _tcJumpForce: 6
+  _tcJumpForce: 3
   _tcJumpDirection: {x: 1.25, y: 1}
   _tcJumpTime: 0.3
-  _tcJumpGravity: 4
+  _tcJumpGravity: 8
   _fallGravity: 6
   _stopGravity: 15
   _maxJumps: 999999

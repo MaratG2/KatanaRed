@@ -121,10 +121,8 @@ namespace KatanaRed.Movement.Jump
                 {
                     if(!Mathf.Sign(_movementInput.Movement.x).Equals(oldDirection))
                         _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.None);
-                    if (_groundWallCollision.IsOnWall)
+                    if (_groundWallCollision.IsOnWall || _groundWallCollision.IsOnGround)
                     {
-                        //rb2d.velocity = Vector2.zero;
-                        //rb2d.gravityScale = wallJumpData.FallGravity;
                         _statesContainer.PlayerWallJumpSM.SetStateTo(PlayerWallJumpStateEnum.None);
                     }
                     await UniTask.Delay((int)(wallJumpData.TCJumpTime * 10f));
