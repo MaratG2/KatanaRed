@@ -9,6 +9,7 @@ namespace KatanaRed.Input
         public Vector2 Movement { get; private set; } = Vector2.zero;
         public Action OnJumpBegin;
         public Action OnJumpEnd;
+        public Action OnDash;
         private int _jumpPhases = 0;
 
         public void PlayerMove(InputAction.CallbackContext context)
@@ -27,6 +28,11 @@ namespace KatanaRed.Input
                 OnJumpEnd?.Invoke();
                 _jumpPhases = 0;
             }
+        }
+
+        public void PlayerDash(InputAction.CallbackContext context)
+        {
+            OnDash?.Invoke();
         }
     }
 }
