@@ -588,6 +588,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4720795573640010918}
+  - component: {fileID: 5383931254872815002}
+  - component: {fileID: 3717381449950519703}
   m_Layer: 0
   m_Name: Dash
   m_TagString: Untagged
@@ -610,6 +612,38 @@ Transform:
   m_Father: {fileID: 8658273563425053364}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5383931254872815002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768492717784867237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92daf3f814fb4133b63b408cb65ee075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashData: {fileID: 11400000, guid: ab61227088cb50541b492f05dcecc7dc, type: 2}
+  rb2d: {fileID: 4870654953726209019}
+  _movementInput: {fileID: 3229201150040379746}
+  _statesContainer: {fileID: 0}
+--- !u!114 &3717381449950519703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768492717784867237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19697b9ff46455abc61c0a28e0a6989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashData: {fileID: 11400000, guid: d1f0b0515cab949418bedf86bc676490, type: 2}
+  rb2d: {fileID: 4870654953726209019}
+  _movementInput: {fileID: 3229201150040379746}
+  _statesContainer: {fileID: 0}
 --- !u!1 &5041000861882611086
 GameObject:
   m_ObjectHideFlags: 0

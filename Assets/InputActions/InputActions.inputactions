@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "VerticalDash",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b9c73f2a-86fd-43e1-b517-c1d57193ab21",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [

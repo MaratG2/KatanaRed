@@ -114781,6 +114781,10 @@ PrefabInstance:
       propertyPath: _statesContainer
       value: 
       objectReference: {fileID: 566495710}
+    - target: {fileID: 3717381449950519703, guid: ef2e671a41074e549af74961ee50990a, type: 3}
+      propertyPath: _statesContainer
+      value: 
+      objectReference: {fileID: 566495710}
     - target: {fileID: 4097788618443215972, guid: ef2e671a41074e549af74961ee50990a, type: 3}
       propertyPath: _statesContainer
       value: 
@@ -114841,6 +114845,10 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 211083603}
+    - target: {fileID: 5383931254872815002, guid: ef2e671a41074e549af74961ee50990a, type: 3}
+      propertyPath: _statesContainer
+      value: 
+      objectReference: {fileID: 566495710}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

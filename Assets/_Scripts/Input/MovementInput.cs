@@ -12,6 +12,8 @@ namespace KatanaRed.Input
         public Action OnHorizontalDash;
         public Action OnVerticalDash;
         private int _jumpPhases = 0;
+        private int _horDashPhases = 0;
+        private int _vertDashPhases = 0;
 
         public void PlayerMove(InputAction.CallbackContext context)
         {
@@ -21,9 +23,10 @@ namespace KatanaRed.Input
         public void PlayerJump(InputAction.CallbackContext context)
         {
             _jumpPhases++;
-            
             if (_jumpPhases == 2)
+            {
                 OnJumpBegin?.Invoke();
+            }
             else if (_jumpPhases == 3)
             {
                 OnJumpEnd?.Invoke();
@@ -33,12 +36,27 @@ namespace KatanaRed.Input
 
         public void PlayerHorizontalDash(InputAction.CallbackContext context)
         {
-            OnHorizontalDash?.Invoke();
+            _horDashPhases++;
+            if (_horDashPhases == 2)
+                OnHorizontalDash?.Invoke();
+            else if (_horDashPhases == 3)
+                _horDashPhases = 0;
         }
         
         public void PlayerVerticalDash(InputAction.CallbackContext context)
         {
-            OnVerticalDash?.Invoke();
+            if (context.ReadValue<float>() < 0.7f)
+            {
+                if (_vertDashPhases > 0)
+                    _vertDashPhases = 0;
+                return;
+            }
+            
+            _vertDashPhases++;
+            if (_vertDashPhases == 2)
+                OnVerticalDash?.Invoke();
+            else if (_vertDashPhases == 3)
+                _vertDashPhases = 0;
         }
     }
 }
