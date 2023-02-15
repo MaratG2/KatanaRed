@@ -33,8 +33,10 @@ namespace KatanaRed.Movement.Dash
             _isDashReady = false;
             _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.Dash);
             rb2d.AddForce(
-                dashData.DashStrength * dashData.DashDirection,
-                ForceMode2D.Impulse);
+                _movementInput.Direction 
+                * dashData.DashStrength
+                * dashData.DashDirection
+                , ForceMode2D.Impulse);
             await UniTask.Delay((int)(dashData.DashTime * 1000));
             rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
             _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.Idle);

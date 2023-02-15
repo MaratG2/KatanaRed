@@ -7,6 +7,7 @@ namespace KatanaRed.Input
     public class MovementInput : MonoBehaviour
     {
         public Vector2 Movement { get; private set; } = Vector2.zero;
+        public int Direction { get; private set; } = 1;
         public Action OnJumpBegin;
         public Action OnJumpEnd;
         public Action OnHorizontalDash;
@@ -18,6 +19,11 @@ namespace KatanaRed.Input
         public void PlayerMove(InputAction.CallbackContext context)
         {
             Movement = context.ReadValue<Vector2>();
+
+            if (Movement.x > 0f)
+                Direction = 1;
+            else if (Movement.x < 0f)
+                Direction = -1;
         }
 
         public void PlayerJump(InputAction.CallbackContext context)
