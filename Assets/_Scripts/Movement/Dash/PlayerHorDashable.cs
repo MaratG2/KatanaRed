@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using KatanaRed.Input;
 using KatanaRed.States;
 using KatanaRed.Utils.Enums;
@@ -22,9 +23,25 @@ namespace KatanaRed.Movement.Dash
         }
         public override void Dash()
         {
-            if (!StateAbleDash())
+            if (!StateAbleDash() || !_isDashReady)
                 return;
-            Debug.Log("Horizontal Dash");
+            HorizontalDashAsync();
+        }
+
+        private async UniTask HorizontalDashAsync()
+        {
+            _isDashReady = false;
+            _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.Dash);
+            rb2d.AddForce(
+                dashData.DashStrength * dashData.DashDirection,
+                ForceMode2D.Impulse);
+            await UniTask.Delay((int)(dashData.DashTime * 1000));
+            rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
+            _statesContainer.PlayerMovementSM.SetStateTo(PlayerMovementStateEnum.Idle);
+            await UniTask.Delay(
+                (int)(dashData.DashCooldown * 1000)
+                - (int)(dashData.DashTime * 1000));
+            _isDashReady = true;
         }
         
         private bool StateAbleDash()

@@ -9,7 +9,7 @@ namespace KatanaRed.Movement.Dash
         [Header("Dependencies")] 
         [SerializeField, Required] protected DashSO dashData;
         [SerializeField, Required] protected Rigidbody2D rb2d;
-
+        protected bool _isDashReady = true;
         public abstract void Dash();
     }
 }
